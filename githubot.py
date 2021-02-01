@@ -56,7 +56,7 @@ async def getIssueInfo(repository: str, issue_number: int) -> str:
         async with session.get(f'https://api.github.com/repos/{repository}/issues/{issue_number}',
                           headers={'accept': 'application/vnd.github.v3.text+json', }) as response:
             status = response.status
-            response: dict = response.json()
+            response: dict = await response.json()
     if status == 200:
         title = response.get('title')
         jump = response.get('html_url')
